@@ -1,6 +1,9 @@
 const minSpeed= 100;
 const maxSpeed = 300;
 const start = -100;
+const randomSpeed = function() {
+  return Math.floor(Math.random()*(maxSpeed -minSpeed)) + minSpeed;
+}
 
 // Enemies our player must avoid
 var Enemy = function(x,y) {
@@ -12,7 +15,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.floor(Math.random()*(maxSpeed -minSpeed)) + minSpeed;
+    this.speed = randomSpeed();
 
 };
 
@@ -25,6 +28,7 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if(this.x >= ctx.canvas.width) {
         this.x = start;
+        this.speed = randomSpeed();
     }
 };
 
@@ -37,6 +41,11 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
+  constructor(x,y) {
+    this.sprite = 'images/char-horn-girl.png';
+    this.x = x;
+    this.y = y;
+  }
 
   update() {
 
@@ -46,12 +55,12 @@ class Player {
   }
 
   render() {
-
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
 }
 
-const player = new Player();
+const player = new Player(200, 400);
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
