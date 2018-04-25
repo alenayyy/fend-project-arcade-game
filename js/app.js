@@ -96,6 +96,13 @@ class Player {
         }
         break;
     }
+// if the player crossed already, display winning alert and reset the game
+    if(this.y < 63) {
+      setTimeout(function(){
+        alert(`Good Job!Start Again!`);
+        player.startOver();
+      },500);
+    }
 
   }
 
