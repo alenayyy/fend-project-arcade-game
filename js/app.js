@@ -45,12 +45,37 @@ class Player {
     this.sprite = 'images/char-horn-girl.png';
     this.x = x;
     this.y = y;
+    this.moveSizeX = 101;
+    this.moveSizeY = 83;
+    
   }
 
   update() {
 
   }
   handleInput(direction) {
+    switch (direction) {
+      case 'left':
+        if(this.x >0) {
+          this.x -= this.moveSizeX;
+        }
+        break;
+      case 'right':
+        if(this.x < ctx.canvas.width - this.moveSizeX) {
+          this.x += this.moveSizeX;
+        }
+        break;
+      case 'up':
+        if(this.y>0) {
+          this.y -= this.moveSizeY;
+        }
+        break;
+      case 'down':
+        if(this.y<606) {
+          this.y += this.moveSizeY;
+        }
+        break;
+    }
 
   }
 
@@ -60,7 +85,7 @@ class Player {
 
 }
 
-const player = new Player(200, 400);
+const player = new Player(202, 404);
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
