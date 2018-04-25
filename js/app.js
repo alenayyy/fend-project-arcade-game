@@ -47,7 +47,7 @@ class Player {
     this.y = y;
     this.moveSizeX = 101;
     this.moveSizeY = 83;
-    
+    this.maxY = 404;
   }
 
   update() {
@@ -71,7 +71,7 @@ class Player {
         }
         break;
       case 'down':
-        if(this.y<606) {
+        if(this.y<this.maxY) {
           this.y += this.moveSizeY;
         }
         break;
