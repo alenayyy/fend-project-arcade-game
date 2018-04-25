@@ -51,8 +51,28 @@ class Player {
   }
 
   update() {
-
+    let padding = 30;
+    allEnemies.forEach(enemy => {
+      if(this.isTouching(this.x, this.y, enemy.x, enemy.y, padding)) {
+        this.startOver();
+      }
+    });
   }
+
+  startOver() {
+    this.x = 202;
+    this.y = this.maxY;
+  }
+
+  isTouching(playerX, playerY, enemyX, enemyY, padding) {
+    return this.isBetween(playerX, enemyX - padding, enemyX + padding) &&
+    this.isBetween(playerY, enemyY - padding, enemyY + padding);
+  }
+
+  isBetween(n, a, b) {
+    return n>= a && n <=b;
+  }
+
   handleInput(direction) {
     switch (direction) {
       case 'left':
@@ -85,14 +105,13 @@ class Player {
 
 }
 
-const player = new Player(202, 404);
-
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
 const enemy1 = new Enemy(start, 145);
 const allEnemies = [enemy1];
+const player = new Player(202, 404);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
