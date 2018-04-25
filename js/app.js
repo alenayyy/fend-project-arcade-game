@@ -1,3 +1,4 @@
+
 const minSpeed= 100;
 const maxSpeed = 300;
 const start = -100;
@@ -48,6 +49,7 @@ class Player {
     this.moveSizeX = 101;
     this.moveSizeY = 83;
     this.maxY = 404;
+
   }
 
   update() {
@@ -62,6 +64,7 @@ class Player {
   startOver() {
     this.x = 202;
     this.y = this.maxY;
+
   }
 
   isTouching(playerX, playerY, enemyX, enemyY, padding) {
@@ -93,15 +96,34 @@ class Player {
       case 'down':
         if(this.y<this.maxY) {
           this.y += this.moveSizeY;
+
         }
         break;
     }
 // if the player crossed already, display winning alert and reset the game
     if(this.y < 63) {
-      setTimeout(function(){
-        alert(`Good Job!Start Again!`);
-        player.startOver();
-      },500);
+
+      swal({
+        title: "Congratulations! You Won!",
+        text: "" ,
+        icon: "success",
+        buttons: {
+          cancel: "Quit",
+          continue: {
+            text: 'Play again',
+            value: 'yes'
+          }
+        }
+      }).then( (value) => {
+        switch(value) {
+          case "yes": this.startOver();
+            break
+          default:
+            swal("Goodbye!");
+            this.startOver();
+            
+        }
+      });
     }
 
   }
