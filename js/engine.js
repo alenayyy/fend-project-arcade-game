@@ -90,6 +90,9 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
+        game.allPrizes.forEach(function(prize) {
+            prize.update();
+        });
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
@@ -150,7 +153,7 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
 
-         allPrizes.forEach(function(prize) {
+         game.allPrizes.forEach(function(prize) {
              prize.render();
          });
 

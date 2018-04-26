@@ -19,15 +19,17 @@ const randomPrize = function(min, max) {
 
 /******************ENEMIES**************************************/
 // Enemies our player must avoid
-var Enemy = function(x,y) {
+var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.heightAdj = 20;
     this.x = x;
-    this.y = y;
+    this.y = y - this.heightAdj;
     this.speed = randomSpeed();
+
 };
 
 // Update the enemy's position, required method for game
@@ -52,14 +54,14 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-/******************GEMS**************************/
-
+/****************** PRIZES **************************/
+// base class for prizes like Gem and Heart
 class Prize {
 
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.positionGem = randomPrize();
+    // this.positionGem = randomPrize();
   }
 
   render() {
@@ -74,11 +76,7 @@ class Gem extends Prize {
   }
 
   update() {
-
   }
-  // render() {
-  //   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  // }
 }
 
 
@@ -87,13 +85,54 @@ class Heart extends Prize {
     super(x, y);
     this.sprite = 'images/Heart.png';
   }
+
+  update() {
+    if(player.isTouching(this.x, this.y, 35)) {
+      game.changeHearts(1);
+      document.getElementById('lives').innerHTML = this.hearts;
+      this.x = -100;
+      this.y = -100;
+    }
+
+  }
 }
+
+
+class Game {
+
+  constructor(hearts) {
+    this.hearts = hearts;
+    this.score = 0;
+    this.level = 0;
+    this.allPrizes = [];
+  }
+
+  changeHearts(count) {
+    this.hearts += count;
+    document.getElementById('lives').innerHTML = this.hearts;
+    return this.hearts;
+  }
+
+  advanceLevel() {
+    this.level++;
+  }
+
+  newLevel() {
+    this.advanceLevel();
+    const gem1 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Orange');
+    const gem2 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Green');
+    const heart = new Heart(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35);
+    this.allPrizes = [gem1, gem2, heart];
+  }
+}
+
 /******************PLAYER**************************/
 class Player {
   constructor(x,y) {
     this.sprite = 'images/char-horn-girl.png';
+    this.heightAdj = 10;
     this.x = x;
-    this.y = y;
+    this.y = y - this.heightAdj;
     this.moveSizeX = 101;
     this.moveSizeY = 83;
     this.maxY = 404;
@@ -103,7 +142,7 @@ class Player {
   update() {
     let padding = 30;
     allEnemies.forEach(enemy => {
-      if(this.isTouching(this.x, this.y, enemy.x, enemy.y, padding)) {
+      if(this.isTouching(enemy.x, enemy.y, padding)) {
         this.startOver();
       }
     });
@@ -115,9 +154,9 @@ class Player {
 
   }
 
-  isTouching(playerX, playerY, enemyX, enemyY, padding) {
-    return this.isBetween(playerX, enemyX - padding, enemyX + padding) &&
-    this.isBetween(playerY, enemyY - padding, enemyY + padding);
+  isTouching(spriteX, spriteY, padding) {
+    return this.isBetween(this.x, spriteX - padding, spriteX + padding) &&
+    this.isBetween(this.y, spriteY - padding, spriteY + padding);
   }
 
   isBetween(n, a, b) {
@@ -188,18 +227,31 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const enemy1 = new Enemy(start, 63);
-const enemy2 = new Enemy(start, 145);
-const enemy3 = new Enemy(start, 227);
-const allEnemies = [enemy1, enemy2, enemy3];
+/*const enemy1 = new Enemy(start, 1 * cellHeight);
+const enemy2 = new Enemy(start, 2 * cellHeight);
+const enemy3 = new Enemy(start, 3 * cellHeight);
+const allEnemies = [enemy1, enemy2, enemy3];*/
+const allEnemies = [];
 
-const player = new Player(303, 404);
-
+var enemyPositionY = 80;       // y position for the first bug
+for(var i= 1; i<=3; i++){ //i is the number of lines
+    if (i % 2 === 0){
+        for(var j = 1; j<=2; j++){ //j is the number of bugs for each line
+            // sets the x position for one enemy at -100, another one at -200
+            allEnemies.push(new Enemy(-100 * j, enemyPositionY, Math.random() * 250));
+        }
+    }
+    else {
+        allEnemies.push(new Enemy(-100, enemyPositionY, Math.random() * 200 ));
+}
+    enemyPositionY += 80;
+}
+//Player initiate
+const player = new Player(3 * cellWidth, 5 * cellHeight);
 //Gem instantiate
-const gem1 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Orange');
-const gem2 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Green');
-const heart1 = new Heart(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35);
-const allPrizes = [gem1, gem2, heart1];
+
+const game = new Game(3);
+game.newLevel();
 
 
 // This listens for key presses and sends the keys to your
