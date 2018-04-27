@@ -27,6 +27,7 @@ var Engine = (function(global) {
     canvas.width = 707;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+    canvas.setAttribute('id','canvas');
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -143,6 +144,7 @@ var Engine = (function(global) {
 
         renderEntities();
     }
+    
 
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined

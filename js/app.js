@@ -1,6 +1,3 @@
-var score = 0;
-document.getElementById('playerScore').innerHTML = score;
-let moveCounterElement = document.querySelector('.moves');
 
 const minSpeed= 100;
 const maxSpeed = 300;
@@ -16,6 +13,49 @@ const randomSpeed = function() {
 const randomPrize = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+/******************Create HTML elements**************************************/
+// create game title
+const gameTitle = document.createElement('h1');
+gameTitle.textContent = 'Arcade Game';
+document.body.appendChild(gameTitle);
+
+
+//create HTML elements for lives, scor and level
+const container = document.createElement('div');
+document.body.appendChild(container);
+container.classList.add('container');
+
+for (var i=1; i<=3; i++) {
+  const para = document.createElement('div');
+  container.appendChild(para);
+
+
+  switch (i) {
+    case 1:
+      para.textContent = "Lives:";
+      para.setAttribute('id','playerLives')
+      break;
+    case 2:
+      para.textContent = "Score:";
+      para.setAttribute('id','playerScore')
+
+      break;
+    case 3:
+      para.textContent = "Level:";
+      para.setAttribute('id','playerLevel')
+      break;
+    default:
+
+  }
+}
+var level = 0;
+document.getElementById('playerLevel').innerHTML = 'Level: ' + level;
+var score = 0;
+document.getElementById('playerScore').innerHTML = 'Score: ' + score;
+var lives = 3;
+document.getElementById('playerLives').innerHTML = 'Lives: ' + lives;
+
+
 
 /******************ENEMIES**************************************/
 // Enemies our player must avoid
@@ -190,7 +230,7 @@ class Player {
     }
 // if the player crossed already, display winning alert and reset the game
     if(this.y < 63) {
-      document.getElementById('playerScore').innerHTML = score++;
+      document.getElementById('playerLevel').innerHTML = 'Level: ' + level++;
       swal({
         title: "Congratulations! You Won!",
         text: "" ,
@@ -209,7 +249,7 @@ class Player {
           default:
             swal("Goodbye!");
             this.startOver();
-            document.getElementById('playerScore').innerHTML = 0;
+            document.getElementById('playerLevel').innerHTML = 'Level: ' + 0;
         }
       });
     }

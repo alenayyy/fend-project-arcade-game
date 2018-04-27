@@ -1,3 +1,14 @@
 body {
     text-align: center;
 }
+.container {
+  margin: auto;
+  width: 707px;
+  display: flex;
+  justify-content: space-around;
+
+
+}
+#canvas {
+  margin-top:-45px;
+}
