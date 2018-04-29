@@ -161,9 +161,32 @@ class Player {
     this.y = 5 * cellHeight - this.heightAdj;
     let livesCount = game.changeHearts(-1);
 
-    game.shufflePrizes();
-
-    document.getElementById('playerLives').innerHTML = 'Lives: ' + livesCount;
+    if(livesCount > 0) {
+      game.shufflePrizes();
+      document.getElementById('playerLives').innerHTML = 'Lives: ' + livesCount;
+    }
+    else {
+        swal({
+          title: "Congratulations! You Won!",
+          text: "" ,
+          icon: "success",
+          buttons: {
+            cancel: "Quit",
+            continue: {
+              text: 'Play again',
+              value: 'yes'
+            }
+          }
+        }).then( (value) => {
+          switch(value) {
+            case "yes": this.startOver();
+              break
+            default:
+              swal("Goodbye!");
+              this.startOver();
+          }
+        });
+      }
   }
 
   startOver() {
@@ -231,30 +254,6 @@ class Player {
         }
         break;
     }
-    // if the player crossed already, display winning alert and reset the game
-    if(game.hearts === 0) {
-      swal({
-        title: "Congratulations! You Won!",
-        text: "" ,
-        icon: "success",
-        buttons: {
-          cancel: "Quit",
-          continue: {
-            text: 'Play again',
-            value: 'yes'
-          }
-        }
-      }).then( (value) => {
-        switch(value) {
-          case "yes": this.startOver();
-            break
-          default:
-            swal("Goodbye!");
-            this.startOver();
-        }
-      });
-    }
-
   }
 
   render() {
