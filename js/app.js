@@ -192,14 +192,14 @@ class Player {
   startOver() {
     this.x = 3 * cellWidth
     this.y = 5 * cellHeight - this.heightAdj;
-    game.lives = 3;
+    game.hearts = 3;
     game.score = 0;
     game.level = 0;
 
     game.newLevel();
 
     document.getElementById('playerScore').innerHTML = 'Score: ' + game.score;
-    document.getElementById('playerLives').innerHTML = 'Lives: ' + game.lives;
+    document.getElementById('playerLives').innerHTML = 'Lives: ' + game.hearts;
   }
 
   isTouching(spriteX, spriteY, padding) {
