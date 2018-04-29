@@ -101,6 +101,9 @@ class Game {
     this.score = 0;
     this.level = 0;
     this.allPrizes = [];
+
+    document.getElementById('playerScore').innerText = 'Score: '+this.score;
+    document.getElementById('playerLives').innerText = 'Lives: '+this.hearts;
   }
 
   // add a live and let the user know the number of lives
@@ -120,6 +123,10 @@ class Game {
     this.level++;
     document.getElementById('playerLevel').innerHTML = 'Level: ' + game.level;
 
+    this.shufflePrizes();
+  }
+
+  shufflePrizes() {
     const gem1 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Orange');
     const gem2 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Green');
     const heart = new Heart(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35);
@@ -144,9 +151,19 @@ class Player {
     let padding = 30;
     allEnemies.forEach(enemy => {
       if(this.isTouching(enemy.x, enemy.y, padding)) {
-        this.startOver();
+        this.bugAteMe();
       }
     });
+  }
+
+  bugAteMe() {
+    this.x = 3 * cellWidth
+    this.y = 5 * cellHeight - this.heightAdj;
+    let livesCount = game.changeHearts(-1);
+
+    game.shufflePrizes();
+
+    document.getElementById('playerLives').innerHTML = 'Lives: ' + livesCount;
   }
 
   startOver() {
