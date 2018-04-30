@@ -50,7 +50,7 @@ class Prize {
   }
 
   // get the position of the prize
-  getCellId() {
+  getCellPosition() {
     let col = Math.floor(this.x / cellWidth);
     let row = Math.floor(this.y / cellHeight);
 
@@ -70,7 +70,7 @@ class Gem extends Prize {
 
   update() {
     // compare the player cell position to the gem position; if match, increase the score and hide the gem
-    if(player.getCellId().x === this.getCellId().x && player.getCellId().y === this.getCellId().y) {
+    if(player.getCellPosition().x === this.getCellPosition().x && player.getCellPosition().y === this.getCellPosition().y) {
       game.addPoints(10);
       this.x = -100;
       this.y = -100;
@@ -86,7 +86,7 @@ class Heart extends Prize {
 
   update() {
     // compare the player cell position to the heart position; if match, increase the  number of lives and hide the heart
-    if(player.getCellId().x === this.getCellId().x && player.getCellId().y === this.getCellId().y) {
+    if(player.getCellPosition().x === this.getCellPosition().x && player.getCellPosition().y === this.getCellPosition().y) {
       game.changeHearts(1);
       this.x = -100;
       this.y = -100;
@@ -106,7 +106,7 @@ class Game {
     document.getElementById('playerLives').innerText = 'Lives: '+this.hearts;
   }
 
-  // add a live and let the user know the number of lives
+  // add or substract a life and let the user know the number of lives remaining
   changeHearts(count) {
     this.hearts += count;
     document.getElementById('playerLives').innerText = 'Lives: '+this.hearts;
@@ -119,6 +119,7 @@ class Game {
     document.getElementById('playerScore').innerText = 'Score: '+this.score;
   }
 
+  // advance the game's level and shuffle the prizes
   newLevel() {
     this.level++;
     document.getElementById('playerLevel').innerHTML = 'Level: ' + game.level;
@@ -126,6 +127,7 @@ class Game {
     this.shufflePrizes();
   }
 
+  // recreate prizes and change their position
   shufflePrizes() {
     const gem1 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Orange');
     const gem2 = new Gem(randomPrize(0, 6) * cellWidth + 25, randomPrize(1,3) * cellHeight + 35, 'Green');
@@ -136,8 +138,8 @@ class Game {
 
 /******************PLAYER**************************/
 class Player {
-  constructor(x,y) {
-    this.sprite = 'images/char-horn-girl.png';
+  constructor(x,y, image) {
+    this.sprite = image;
     this.heightAdj = 10;
     this.x = x;
     this.y = y - this.heightAdj;
@@ -156,6 +158,7 @@ class Player {
     });
   }
 
+  // when player is eaten by bug, the player position is reset and one life is taken away
   bugAteMe() {
     this.x = 3 * cellWidth
     this.y = 5 * cellHeight - this.heightAdj;
@@ -189,28 +192,30 @@ class Player {
       }
   }
 
+  // resets the game's hearts, score and level; it also resets the player to the starting point
   startOver() {
-    this.x = 3 * cellWidth
-    this.y = 5 * cellHeight - this.heightAdj;
     game.hearts = 3;
     game.score = 0;
     game.level = 0;
 
-    game.newLevel();
+    this.increaseLevelAndResetPlayerPosition();
 
     document.getElementById('playerScore').innerHTML = 'Score: ' + game.score;
     document.getElementById('playerLives').innerHTML = 'Lives: ' + game.hearts;
   }
 
+  // check if player is touching anything (prize or bug)
   isTouching(spriteX, spriteY, padding) {
     return this.isBetween(this.x, spriteX - padding, spriteX + padding) &&
     this.isBetween(this.y, spriteY - padding, spriteY + padding);
   }
 
+  // return true if n is between a and b; false otherwise
   isBetween(n, a, b) {
     return n>= a && n <=b;
   }
 
+  // increase the level count and reset the player's position (x/y)
   increaseLevelAndResetPlayerPosition() {
     // increase the level and shuffle the prizes
     game.newLevel();
@@ -240,7 +245,6 @@ class Player {
         if(this.y < 63) {
           locked = true;
           // reset the player to the start point
-          // setTimeout(this.setPlayerAndLevel.call(player), 3000);
           setTimeout(function(){
             player.increaseLevelAndResetPlayerPosition();
             locked = false;
@@ -260,7 +264,9 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-  getCellId() {
+  // return the coordinates of the cell based on current x and y;
+  // for example, if x = 303 and y = 405, the cell position returned is {x: 3, y: 5}
+  getCellPosition() {
 
     let col = Math.floor(this.x / cellWidth);
     let row = Math.floor(this.y / cellHeight) + 1;
@@ -287,7 +293,7 @@ const cellWidth = 101;
 const columns = 7;
 const rows = 3;
 
-// flag to lock the keyboard when player gets to the water to avoid increasing the level  more than once
+// flag to lock the keyboard when player gets to the water to avoid increasing the level more than once
 let locked = false;
 
 const randomSpeed = function() {
@@ -304,7 +310,7 @@ gameTitle.textContent = 'Arcade Game';
 document.body.appendChild(gameTitle);
 
 
-//create HTML elements for lives, scor and level
+//create HTML elements for lives, score and level
 const container = document.createElement('div');
 document.body.appendChild(container);
 container.classList.add('container');
@@ -357,10 +363,10 @@ for(var i= 1; i<=3; i++){ //i is the number of lines
 }
     enemyPositionY += cellHeight;
 }
-//Player initiate
-const player = new Player(3 * cellWidth, 5 * cellHeight);
-//Gem instantiate
+//Player instantiate
+const player = new Player(3 * cellWidth, 5 * cellHeight, 'images/char-horn-girl.png');
 
+//Game instantiate
 const game = new Game(3);
 game.newLevel();
 
