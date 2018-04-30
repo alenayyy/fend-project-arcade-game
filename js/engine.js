@@ -144,7 +144,7 @@ var Engine = (function(global) {
 
         renderEntities();
     }
-    
+
 
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined

@@ -2,16 +2,46 @@ body {
     text-align: center;
     font-family: 'Pacifico', cursive;
     font-family: 'Lobster', cursive;
+    background: linear-gradient(  #a3cce2, #76b1d3);
 
 }
+* {
+  box-sizing: border-box;
+}
+
 .container {
   margin: auto;
   width: 707px;
   display: flex;
   justify-content: space-around;
-
-
+  border: 1.2px solid #666363;
+  border-radius: 4px;
+  background: #8395e0;
+  color: #515050;
 }
+
 #canvas {
-  margin-top:-45px;
+  margin-top:-51px;
+}
+
+h1 {
+color: #515050;
+}
+
+#wrapper {
+  display: flex;
+  margin: auto;
+  width: 707px;
+  justify-content: center;
+}
+
+.button {
+  width: 80px;
+  height: 30px;
+  font-family: 'Pacifico', cursive;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: #a3cce2;
+  color: #515050;
 }

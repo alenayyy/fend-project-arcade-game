@@ -1,0 +1,50 @@
+const wrapper = document.createElement('div');
+document.body.appendChild(wrapper);
+wrapper.setAttribute('id','wrapper');
+
+// create Reset and Pause button HTML elements
+function createButton(name) {
+  const button = document.createElement('button');
+  wrapper.appendChild(button);
+  button.setAttribute('class','button');
+  button.textContent = name;
+  button.setAttribute('id',name);
+}
+createButton('Reset');
+createButton('Pause');
+
+// add event listener on div wrapper element
+wrapper.addEventListener('click', respondToTheClick);
+
+// variable array to keep the enemy's bug
+var enemySpeeds = [];
+
+// function to be executed when reset/ pause is clicked
+function respondToTheClick(evt) {
+  console.log('A BUTTON was clicked with text ' + evt.target.textContent);
+//if the reset is clicked set the game from begining and give the enemy's bug the speed for level one
+  if (evt.target.nodeName === 'BUTTON' && evt.target.innerText === "Reset") {  // ← verifies target is desired element
+      console.log('A BUTTON was clicked with text ' + evt.target.textContent);
+      document.getElementById('Pause').innerText = "Pause";
+      player.startOver();
+      allEnemies.forEach(enemy => {
+        enemy.speed = randomSpeed();
+      })
+  }
+  //if the pause button is clicked set the enemys' speed to zero
+  else if(evt.target.nodeName === 'BUTTON' && evt.target.innerText === "Pause") {
+    allEnemies.forEach((enemy, index) => {
+      enemySpeeds[index] = enemy.speed;
+      enemy.speed = 0;
+    })
+    evt.target.innerText = "Continue";
+  }
+  /*if the pause button is clicked second time set the enemys' speed to the value they had
+  when the button pause was clicked first time*/
+  else if(evt.target.nodeName === 'BUTTON' && evt.target.innerText === "Continue") {
+    allEnemies.forEach((enemy, index) => {
+      enemy.speed = enemySpeeds[index];
+    })
+    evt.target.innerText = "Pause";
+  }
+}
