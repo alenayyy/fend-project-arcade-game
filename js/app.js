@@ -177,7 +177,9 @@ class Player {
     }
     else {
         swal({
-          title: "Congratulations! You Won!",
+          title:
+          `Game over!
+          You reached level ${game.level} and won ${game.score} points!`,
           text: "" ,
           icon: "success",
           buttons: {
@@ -193,7 +195,7 @@ class Player {
               break
             default:
               swal("Goodbye!");
-              this.startOver();
+              stopTheGame();
           }
         });
       }
