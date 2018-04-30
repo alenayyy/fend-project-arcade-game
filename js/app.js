@@ -1,7 +1,7 @@
 
 /******************ENEMIES**************************************/
 // Enemies our player must avoid
-var Enemy = function(x,y,speed) {
+var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -124,6 +124,12 @@ class Game {
     this.level++;
     document.getElementById('playerLevel').innerHTML = 'Level: ' + game.level;
 
+    // every time when advancing one level, increase the min/max speed
+    if(this.level > 1) {
+      minSpeed += increaseLevelSpeed;
+      maxSpeed += increaseLevelSpeed;
+    }
+
     this.shufflePrizes();
   }
 
@@ -149,6 +155,7 @@ class Player {
 
   }
 
+  // detect collision between player and bugs
   update() {
     let padding = 30;
     allEnemies.forEach(enemy => {
@@ -192,11 +199,14 @@ class Player {
       }
   }
 
-  // resets the game's hearts, score and level; it also resets the player to the starting point
+  // resets the game's hearts, score, level and min/max speed; it also resets the player to the starting point
   startOver() {
     game.hearts = 3;
     game.score = 0;
     game.level = 0;
+
+    minSpeed = 100;
+    maxSpeed = 300;
 
     this.increaseLevelAndResetPlayerPosition();
 
@@ -283,8 +293,10 @@ class Player {
 
 /******************Create Constants**************************************/
 
-const minSpeed= 100;
-const maxSpeed = 300;
+let minSpeed = 100;
+let maxSpeed = 300;
+const increaseLevelSpeed = 20;
+
 const start = -100;
 
 const cellHeight = 83;
@@ -297,7 +309,7 @@ const rows = 3;
 let locked = false;
 
 const randomSpeed = function() {
-  return Math.floor(Math.random()*(maxSpeed -minSpeed)) + minSpeed;
+  return Math.floor(Math.random()*(maxSpeed - minSpeed)) + minSpeed;
 }
 
 const randomPrize = function(min, max) {
@@ -309,7 +321,6 @@ const gameTitle = document.createElement('h1');
 gameTitle.textContent = 'Arcade Game';
 document.body.appendChild(gameTitle);
 
-
 //create HTML elements for lives, score and level
 const container = document.createElement('div');
 document.body.appendChild(container);
@@ -318,7 +329,6 @@ container.classList.add('container');
 for (var i=1; i<=3; i++) {
   const para = document.createElement('div');
   container.appendChild(para);
-
 
   switch (i) {
     case 1:
@@ -334,8 +344,6 @@ for (var i=1; i<=3; i++) {
       para.textContent = "Level:";
       para.setAttribute('id','playerLevel')
       break;
-    default:
-
   }
 }
 
@@ -350,16 +358,17 @@ const enemy3 = new Enemy(start, 3 * cellHeight);
 const allEnemies = [enemy1, enemy2, enemy3];*/
 const allEnemies = [];
 
+// set positions for all enemies
 var enemyPositionY = cellHeight;       // y position for the first bug
 for(var i= 1; i<=3; i++){ //i is the number of lines
     if (i % 2 === 0){
         for(var j = 1; j<=2; j++){ //j is the number of bugs for each line
             // sets the x position for one enemy at -100, another one at -200
-            allEnemies.push(new Enemy(-100 * j, enemyPositionY, Math.random() * 250));
+            allEnemies.push(new Enemy(-100 * j, enemyPositionY));
         }
     }
     else {
-        allEnemies.push(new Enemy(-100, enemyPositionY, Math.random() * 200 ));
+        allEnemies.push(new Enemy(-100, enemyPositionY));
 }
     enemyPositionY += cellHeight;
 }
