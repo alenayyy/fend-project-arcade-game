@@ -2,7 +2,9 @@ body {
     text-align: center;
     font-family: 'Pacifico', cursive;
     font-family: 'Lobster', cursive;
-    background: linear-gradient(#76b1d3, #f0f5f5);
+    background: -webkit-linear-gradient(#f0f5f5, #76b1d3);
+    background: -o-linear-gradient(#f0f5f5, #76b1d3);
+    background: linear-gradient(#f0f5f5, #76b1d3);
 
 }
 * {
@@ -18,7 +20,9 @@ body {
   border-radius: 4px;
   background: #8395e0;
   color: #515050;
-  background: linear-gradient( #f0f5f5,#546ed2);
+  background: -webkit-linear-gradient(#f0f5f5, #546ed2);
+  background: -o-linear-gradient(#f0f5f5, #546ed2);
+  background: linear-gradient(#f0f5f5, #546ed2);
 }
 
 #canvas {
@@ -34,7 +38,6 @@ color: #3f3d3d;
   margin: auto;
   width: 207px;
   justify-content: center;
-
 }
 
 .button {
@@ -42,19 +45,50 @@ color: #3f3d3d;
   height: 30px;
   font-family: 'Pacifico', cursive;
   margin: 5px;
-  border: 1.2px solid #666363;
+  border: 1px solid #666363;
   border-radius: 6px;
   background-color: #a3cce2;
   color: #515050;
-  background: linear-gradient( #f0f5f5,#76b1d3);
+  background: -webkit-linear-gradient(#f0f5f5, #76b1d3);
+  background: -o-linear-gradient(#f0f5f5, #76b1d3);
+  background: linear-gradient(#f0f5f5, #76b1d3);
+}
+
+.button:hover {
+  box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+  border: 1.5px solid #666363;
 }
 
 .swal-modal {
   border: 3px solid #40515e;
-  background: linear-gradient( #f0f5f5,#76b1d3);
+  background: -webkit-linear-gradient(#f0f5f5, #76b1d3);
+  background: -o-linear-gradient(#f0f5f5, #76b1d3);
+  background: linear-gradient(#f0f5f5, #76b1d3);
   border-radius: 10px;
 }
 
 .swal-button {
-  background: linear-gradient( #f0f5f5,#76b1d3);
+  background: -webkit-linear-gradient(#f0f5f5, #76b1d3);
+  background: -o-linear-gradient(#f0f5f5, #76b1d3);
+  background: linear-gradient(#f0f5f5, #76b1d3);
+}
+
+.image {
+  border: 1px solid #777;
+  margin-left: 5px;
+  background: -webkit-linear-gradient(#f0f5f5, #96bcd1);
+  background: -o-linear-gradient(#f0f5f5, #96bcd1);
+  background: linear-gradient(#f0f5f5, #96bcd1);
+  border-radius: 6px;
+  box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+}
+
+.image:hover {
+  border: 2px solid #777;
+  box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+}
+
+#divImg {
+  width: 288px;
+  margin: auto;
 }

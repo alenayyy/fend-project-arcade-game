@@ -11,7 +11,6 @@ var Enemy = function(x,y) {
     this.x = x;
     this.y = y - this.heightAdj;
     this.speed = randomSpeed();
-
 };
 
 // Update the enemy's position, required method for game
@@ -39,7 +38,6 @@ Enemy.prototype.render = function() {
 /****************** PRIZES **************************/
 // base class for prizes like Gem and Heart
 class Prize {
-
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -53,7 +51,6 @@ class Prize {
   getCellPosition() {
     let col = Math.floor(this.x / cellWidth);
     let row = Math.floor(this.y / cellHeight);
-
     let cellPos = {
       x: col,
       y: row
@@ -358,6 +355,19 @@ for (var i=1; i<=3; i++) {
 const enemy2 = new Enemy(start, 2 * cellHeight);
 const enemy3 = new Enemy(start, 3 * cellHeight);
 const allEnemies = [enemy1, enemy2, enemy3];*/
+
+const characters= [
+  'images/char-boy.png',
+  'images/char-cat-girl.png',
+  'images/char-horn-girl.png',
+  'images/char-pink-girl.png',
+  'images/char-princess-girl.png'
+];
+
+function setPlayer(i) {
+  return new Player(3 * cellWidth, 5 * cellHeight, characters[i]);
+}
+
 const allEnemies = [];
 
 // set positions for all enemies
@@ -375,7 +385,7 @@ for(var i= 1; i<=3; i++){ //i is the number of lines
     enemyPositionY += cellHeight;
 }
 //Player instantiate
-const player = new Player(3 * cellWidth, 5 * cellHeight, 'images/char-horn-girl.png');
+let player = setPlayer(2);
 
 //Game instantiate
 const game = new Game(3);
