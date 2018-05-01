@@ -69,6 +69,7 @@ class Gem extends Prize {
     // compare the player cell position to the gem position; if match, increase the score and hide the gem
     if(player.getCellPosition().x === this.getCellPosition().x && player.getCellPosition().y === this.getCellPosition().y) {
       game.addPoints(10);
+      sound[1].play();
       this.x = -100;
       this.y = -100;
     }
@@ -85,6 +86,7 @@ class Heart extends Prize {
     // compare the player cell position to the heart position; if match, increase the  number of lives and hide the heart
     if(player.getCellPosition().x === this.getCellPosition().x && player.getCellPosition().y === this.getCellPosition().y) {
       game.changeHearts(1);
+      sound[0].play();
       this.x = -100;
       this.y = -100;
     }
@@ -98,7 +100,6 @@ class Game {
     this.score = 0;
     this.level = 0;
     this.allPrizes = [];
-
     document.getElementById('playerScore').innerText = 'Score: '+this.score;
     document.getElementById('playerLives').innerText = 'Lives: '+this.hearts;
   }
@@ -125,6 +126,7 @@ class Game {
     if(this.level > 1) {
       minSpeed += increaseLevelSpeed;
       maxSpeed += increaseLevelSpeed;
+      sound[2].play();
     }
 
     this.shufflePrizes();
@@ -157,6 +159,7 @@ class Player {
     let padding = 30;
     allEnemies.forEach(enemy => {
       if(this.isTouching(enemy.x, enemy.y, padding)) {
+        sound[3].play();
         this.bugAteMe();
       }
     });
@@ -173,6 +176,7 @@ class Player {
       document.getElementById('playerLives').innerHTML = 'Lives: ' + livesCount;
     }
     else {
+      sound[4].play();
         swal({
           title:
           `Game over!
@@ -203,12 +207,9 @@ class Player {
     game.hearts = 3;
     game.score = 0;
     game.level = 0;
-
     minSpeed = 100;
     maxSpeed = 300;
-
     this.increaseLevelAndResetPlayerPosition();
-
     document.getElementById('playerScore').innerHTML = 'Score: ' + game.score;
     document.getElementById('playerLives').innerHTML = 'Lives: ' + game.hearts;
   }
@@ -263,7 +264,6 @@ class Player {
       case 'down':
         if(this.y<this.maxY) {
           this.y += this.moveSizeY;
-
         }
         break;
     }
@@ -276,7 +276,6 @@ class Player {
   // return the coordinates of the cell based on current x and y;
   // for example, if x = 303 and y = 405, the cell position returned is {x: 3, y: 5}
   getCellPosition() {
-
     let col = Math.floor(this.x / cellWidth);
     let row = Math.floor(this.y / cellHeight) + 1;
 
@@ -284,7 +283,6 @@ class Player {
       x: col,
       y: row
     }
-
     return cellPos;
   }
 
@@ -337,7 +335,6 @@ for (var i=1; i<=3; i++) {
     case 2:
       para.textContent = "Score:";
       para.setAttribute('id','playerScore')
-
       break;
     case 3:
       para.textContent = "Level:";
@@ -391,6 +388,12 @@ let player = setPlayer(2);
 const game = new Game(3);
 game.newLevel();
 
+var sound = [];
+sound.push(new Audio('audio/lives.wav'));
+sound.push(new Audio('audio/gems.wav'));
+sound.push(new Audio('audio/level.wav'));
+sound.push(new Audio('audio/enemy.wav'));
+sound.push(new Audio('audio/gameoverr.mp3'));
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

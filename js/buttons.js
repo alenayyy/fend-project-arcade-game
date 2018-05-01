@@ -33,7 +33,6 @@ function playTheGame() {
 
 // function to be executed when reset/ pause is clicked
 function respondToTheClick(evt) {
-  console.log('A BUTTON was clicked with text ' + evt.target.textContent);
 //if the reset is clicked set the game from begining and give the enemy's bug the speed for level one
   if (evt.target.nodeName === 'BUTTON' && evt.target.innerText === "Reset") {  // ← verifies target is desired element
       document.getElementById('Pause').innerText = "Pause";
