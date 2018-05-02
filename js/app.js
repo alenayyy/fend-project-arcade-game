@@ -315,7 +315,7 @@ const randomPrize = function(min, max) {
 /******************Create HTML elements**************************************/
 // create game title
 const gameTitle = document.createElement('h1');
-gameTitle.textContent = 'Arcade Game';
+gameTitle.textContent = 'Arcade Game - FROGGER';
 document.body.appendChild(gameTitle);
 
 //create HTML elements for lives, score and level

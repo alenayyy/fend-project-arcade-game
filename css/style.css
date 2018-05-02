@@ -1,11 +1,12 @@
+html, body {
+  min-height: 100%;
+}
 body {
     text-align: center;
-    font-family: 'Pacifico', cursive;
-    font-family: 'Lobster', cursive;
+    font-family: 'Anton', sans-serif !important;
     background: -webkit-linear-gradient(#f0f5f5, #76b1d3);
     background: -o-linear-gradient(#f0f5f5, #76b1d3);
     background: linear-gradient(#f0f5f5, #76b1d3);
-
 }
 * {
   box-sizing: border-box;
@@ -13,7 +14,7 @@ body {
 
 .container {
   margin: auto;
-  width: 707px;
+  width: 707px !important;
   display: flex;
   justify-content: space-around;
   border: 1.2px solid #666363;
@@ -23,10 +24,12 @@ body {
   background: -webkit-linear-gradient(#f0f5f5, #546ed2);
   background: -o-linear-gradient(#f0f5f5, #546ed2);
   background: linear-gradient(#f0f5f5, #546ed2);
+
 }
 
 #canvas {
   margin-top:-51px;
+  margin-bottom: 12px;
 }
 
 h1 {
@@ -43,8 +46,8 @@ color: #3f3d3d;
 .button {
   width: 80px;
   height: 30px;
-  font-family: 'Pacifico', cursive;
-  margin: 5px;
+  font-family: 'Anton', sans-serif;
+  margin: 15px 5px 15px 0;
   border: 1px solid #666363;
   border-radius: 6px;
   background-color: #a3cce2;
@@ -76,6 +79,7 @@ color: #3f3d3d;
 .image {
   border: 1px solid #777;
   margin-left: 5px;
+  margin-top: 20px;
   background: -webkit-linear-gradient(#f0f5f5, #96bcd1);
   background: -o-linear-gradient(#f0f5f5, #96bcd1);
   background: linear-gradient(#f0f5f5, #96bcd1);
