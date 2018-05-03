@@ -20,7 +20,8 @@ The goal of the player is to reach the water, without running into any enemies a
 * To pause the game, click the pause button
 * When the number of lives is 0, the game is over.
 
-The game is written in JavaScript and uses Bootstrap and a third party library - SweetAlert - to create a modal and display a message at the end of the game.
+
+The game is written in JavaScript and uses Bootstrap and a third party library - SweetAlert - to create a modal and display a message at the end of the game.Game sounds from Freesounds.org. 
 
 ## Contributing
 Game engine and resources including the canvas provided by Udacity.
