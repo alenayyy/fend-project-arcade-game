@@ -20,15 +20,15 @@ var enemySpeeds = [];
 
 function stopTheGame() {
   allEnemies.forEach((enemy, index) => {
-  enemySpeeds[index] = enemy.speed;
-  enemy.speed = 0;
-})
+    enemySpeeds[index] = enemy.speed;
+    enemy.speed = 0;
+  })
 };
 
 function playTheGame() {
   allEnemies.forEach((enemy, index) => {
-  enemy.speed = enemySpeeds[index];
-})
+    enemy.speed = enemySpeeds[index];
+  })
 };
 
 // function to be executed when reset/ pause is clicked
