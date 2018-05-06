@@ -1,3 +1,4 @@
+"use strict"
 const wrapper = document.createElement('div');
 document.body.appendChild(wrapper);
 wrapper.setAttribute('id','wrapper');

@@ -1,3 +1,4 @@
+"use strict"
 //create HTML elements : paragraph, div, images
 const chooseCharacter = document.createElement('p');
 chooseCharacter.textContent = "Choose the character:";

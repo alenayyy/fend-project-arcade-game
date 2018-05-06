@@ -1,4 +1,4 @@
-
+"use strict"
 /******************ENEMIES**************************************/
 // Enemies our player must avoid
 var Enemy = function(x,y) {
