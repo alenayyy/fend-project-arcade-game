@@ -5,19 +5,19 @@ The Classic Arcade Game Clone - FROGGER
 * [Requirements](#requirements)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
-* [Udacity's Instructions](#udacity's Instructions)
+* [Udacity's Instructions](#Udacity's Instructions)
 
 ## Requirements
 Provided with visual assets and a game loop engine by Udacity; using these tools you must add a number of entities to the game including the player characters and enemies to recreate the classic arcade game Frogger.
 
 ## Instructions
 
-  How to Run The Game
+### How to Run The Game
 * Download or clone the repository on your computer
 * If downloaded, unzip it
 * Open the "index.html" file in your browser to play the game
 
-  How to Play The Game
+### How to Play The Game
 * Before starting the game, choose a character
 * To start the game move the player.
 * Use the arrow keys on keyboard to move the player UP, DOWN, LEFT, RIGHT.
