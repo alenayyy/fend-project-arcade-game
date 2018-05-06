@@ -2,9 +2,9 @@ The Classic Arcade Game Clone - FROGGER
 ===============================
 
 ## Table of Contents
-* [Project Requirements](#Project Requirements)
-* [Instructions-How to run the game](#Instructions-How to Run The Game)
-* [Instructions-How to Play The Game](#instructions-How to Play The Game)
+* [Requirements](#Project Requirements)
+* [InstructionsPlay](#Instructions- How to Run The Game)
+* [InstructionsRun](#instructions- How to Play The Game)
 * [Contributing](#contributing)
 * [Udacity's Instructions](#udacity Instructions)
 
