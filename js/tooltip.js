@@ -1,4 +1,3 @@
-
 var imageNames = ['Smart Boy','Cat Girl','Horn Girl','Pink Girl','Princess Girl'];
 imageNames.forEach((name,index) => {
   const spanImg = document.createElement('span');

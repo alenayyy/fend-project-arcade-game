@@ -54,7 +54,7 @@ class Prize {
     let cellPos = {
       x: col,
       y: row
-    }
+    };
     return cellPos;
   }
 }
@@ -167,7 +167,7 @@ class Player {
 
   // when player is eaten by bug, the player position is reset and one life is taken away
   bugAteMe() {
-    this.x = 3 * cellWidth
+    this.x = 3 * cellWidth;
     this.y = 5 * cellHeight - this.heightAdj;
     let livesCount = game.changeHearts(-1);
 
@@ -193,7 +193,7 @@ class Player {
         }).then( (value) => {
           switch(value) {
             case "yes": this.startOver();
-              break
+              break;
             default:
               swal("Goodbye!");
               stopTheGame();
@@ -282,7 +282,7 @@ class Player {
     let cellPos = {
       x: col,
       y: row
-    }
+    };
     return cellPos;
   }
 
@@ -299,19 +299,17 @@ const start = -100;
 const cellHeight = 83;
 const cellWidth = 101;
 
-const columns = 7;
-const rows = 3;
 
 // flag to lock the keyboard when player gets to the water to avoid increasing the level more than once
 let locked = false;
 
 const randomSpeed = function() {
   return Math.floor(Math.random()*(maxSpeed - minSpeed)) + minSpeed;
-}
+};
 
 const randomPrize = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 /******************Create HTML elements**************************************/
 // create game title
 const gameTitle = document.createElement('h1');
@@ -330,15 +328,15 @@ for (var i=1; i<=3; i++) {
   switch (i) {
     case 1:
       para.textContent = "Lives:";
-      para.setAttribute('id','playerLives')
+      para.setAttribute('id','playerLives');
       break;
     case 2:
       para.textContent = "Score:";
-      para.setAttribute('id','playerScore')
+      para.setAttribute('id','playerScore');
       break;
     case 3:
       para.textContent = "Level:";
-      para.setAttribute('id','playerLevel')
+      para.setAttribute('id','playerLevel');
       break;
   }
 }

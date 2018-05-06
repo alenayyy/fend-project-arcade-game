@@ -1,6 +1,6 @@
 //create HTML elements : paragraph, div, images
 const chooseCharacter = document.createElement('p');
-chooseCharacter.textContent = "Choose the character:"
+chooseCharacter.textContent = "Choose the character:";
 document.body.appendChild(chooseCharacter);
 
 const divImg = document.createElement('div');

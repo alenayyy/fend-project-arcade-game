@@ -107,7 +107,7 @@ var Engine = (function(global) {
      * they are just drawing the entire screen over and over.
      */
     function render() {
-      
+
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
@@ -124,7 +124,7 @@ var Engine = (function(global) {
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that

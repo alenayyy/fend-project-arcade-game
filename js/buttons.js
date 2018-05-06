@@ -22,14 +22,14 @@ function stopTheGame() {
   allEnemies.forEach((enemy, index) => {
     enemySpeeds[index] = enemy.speed;
     enemy.speed = 0;
-  })
-};
+  });
+}
 
 function playTheGame() {
   allEnemies.forEach((enemy, index) => {
     enemy.speed = enemySpeeds[index];
-  })
-};
+  });
+}
 
 // function to be executed when reset/ pause is clicked
 function respondToTheClick(evt) {
@@ -39,7 +39,7 @@ function respondToTheClick(evt) {
       player.startOver();
       allEnemies.forEach(enemy => {
         enemy.speed = randomSpeed();
-      })
+      });
   }
   //if the pause button is clicked, set the enemys' speed to zero
   else if(evt.target.nodeName === 'BUTTON' && evt.target.innerText === "Pause") {
