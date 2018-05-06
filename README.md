@@ -5,7 +5,7 @@ The Classic Arcade Game Clone - FROGGER
 * [Requirements](#requirements)
 * [Instructions](#instructions)
 * [Contributing](#contributing)
-* [Udacity's Instructions](#Udacity's Instructions)
+* [Udacity'sInstructions](#udacity'sInstructions)
 
 ## Requirements
 Provided with visual assets and a game loop engine by Udacity; using these tools you must add a number of entities to the game including the player characters and enemies to recreate the classic arcade game Frogger.
@@ -37,7 +37,7 @@ The rest of the functionality created by Alena.
 
 The game is written in JavaScript and uses Bootstrap and a third party library - SweetAlert - to create a modal and display a message at the end of the game.Game sounds from Freesounds.org.
 
-## Udacity's Instructions
+## Udacity'sInstructions
 * If you need a refresher on Object Oriented JavaScript, review our course and OOJS Notes.
 * If you'd like a more detailed explanation as to how the game engine works, see our HTML5 Canvas course.
 * Read the detailed instructions for the project.
