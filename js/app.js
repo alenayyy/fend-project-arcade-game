@@ -7,7 +7,7 @@ var Enemy = function(x,y) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.heightAdj = 20;
+    this.heightAdj = 15;
     this.x = x;
     this.y = y - this.heightAdj;
     this.speed = randomSpeed();
@@ -156,9 +156,10 @@ class Player {
 
   // detect collision between player and bugs
   update() {
-    let padding = 30;
+    let paddingX =77;
+    let paddingY = 10;
     allEnemies.forEach(enemy => {
-      if(this.isTouching(enemy.x, enemy.y, padding)) {
+      if(this.isTouching(enemy.x, enemy.y, paddingX, paddingY)) {
         sound[3].play();
         this.bugAteMe();
       }
@@ -214,10 +215,10 @@ class Player {
     document.getElementById('playerLives').innerHTML = 'Lives: ' + game.hearts;
   }
 
-  // check if player is touching anything (prize or bug)
-  isTouching(spriteX, spriteY, padding) {
-    return this.isBetween(this.x, spriteX - padding, spriteX + padding) &&
-    this.isBetween(this.y, spriteY - padding, spriteY + padding);
+  // check if player is touching any bug
+  isTouching(spriteX, spriteY, paddingX, paddingY) {
+    return this.isBetween(this.x, spriteX - paddingX, spriteX + paddingX) &&
+    this.isBetween(this.y, spriteY - paddingY, spriteY + paddingY);
   }
 
   // return true if n is between a and b; false otherwise
